@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function TodoForm(props) {
+  console.log("TODOFORM - PROPS", props);
   return (
     <div>
       <form>
         <input
-          onChange={props.onInputChange}
           type="text"
-          name="name"
-          value={props.item}
+          value={props.todoInput}
+          name="todoInput"
+          onChange={props.inputChange}
         />
+        <button onClick={(event) => props.todoSubmit(event)}>Submit</button>
+        <button onClick={(event) => props.clearCompleted(event)}>
+          Clear Completed
+        </button>
       </form>
-
-      <button>Submit</button>
-      <button>Clear Completed</button>
     </div>
   );
 }

@@ -1,43 +1,39 @@
-import React, { useState } from "react";
-import TodoForm from "./components/TodoForm";
+import React, { useState, useReducer } from "react";
+import { initialValue, reducer } from "./reducers/ReducerFile";
 import TodoList from "./components/TodoList";
+import TodoForm from "./components/TodoForm";
 
 export default function App() {
-  const data = [
-    {
-      name: "Fold the laundry",
-      id: 123,
-      completed: false,
-    },
-    {
-      name: "Walk the dogs",
-      id: 1234,
-      completed: false,
-    },
-    {
-      name: "Cook the dinner",
-      id: 12345,
-      completed: false,
-    },
-  ];
+  const [state, dispatch] = useReducer(reducer, initialValue);
+  const [todoInput, setTodoInput] = useState("");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    completed: false,
-    id: 123,
-  });
+  const inputChange = (event) => {
+    event.preventDefault();
+    setTodoInput(event.target.value);
+  };
 
-  const onInputChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
+  const todoSubmit = (event) => {
+    event.preventDefault();
+    dispatch({ type: "ADD_TODO", payload: todoInput });
+  };
+  const toggleItem = (item) => {
+    dispatch({ type: "TOGGLE_ITEM", payload: item });
+  };
+
+  const clearCompleted = (event) => {
+    event.preventDefault();
+    dispatch({ type: "CLEAR_ALL" });
   };
 
   return (
     <div>
-      <TodoForm onInputChange={onInputChange} />
-      <TodoList data={data} />
+      <TodoList state={state} toogleItem={toggleItem} />
+      <TodoForm
+        inputChange={inputChange}
+        todoSubmit={todoSubmit}
+        clearCompleted={clearCompleted}
+        todoInput={todoInput}
+      />
     </div>
   );
 }

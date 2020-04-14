@@ -1,43 +1,58 @@
-// export const initialList = [
-//   {
-//     name: "Learn about reducers",
-//     completed: false,
-//     id: 3892987589,
-//   },
-//   {
-//     name: "Study React",
-//     completed: false,
-//     id: 3892987590,
-//   },
-//   {
-//     name: "Read about Redux",
-//     completed: false,
-//     id: 3892987591,
-//   },
-// ];
+export const initialValue = {
+  todo: [
+    {
+      name: "Learn about reducers",
+      completed: false,
+      id: 3889,
+    },
+    {
+      name: "Study React",
+      completed: false,
+      id: 389290,
+    },
+    {
+      name: "Read about Redux",
+      completed: false,
+      id: 3591,
+    },
+  ],
+};
 
-// //action objects are pieces of data that descrive an event that just occurred in the UI
-// //EVENT:click on the item to toggle completed(textDecoration: "line-through") {type: "TOGGLE_COMPLETED" }
-// //STATE: {completed : false}
-// //EXPECTED RESULT:  { completed: true }
-
-// export const reducer = (state, action) => {
-//   //   switch (action.type) {
-//   //     case "TOGGLE_COMPLETED":
-//   //       return {
-//   //         ...state,
-//   //         completed: !state.completed,
-//   //       };
-//   switch (action.type) {
-//     case "ADD_ITEM":
-//       return {
-//         ...state,
-//         name: action.payload,
-//         id: Date.now(),
-//         completed: false,
-//       };
-
-//     default:
-//       return state; //( completed: true)
-//   }
-// };
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return {
+        ...state,
+        todo: [
+          ...state.todo,
+          {
+            name: action.payload,
+            id: Date.now(),
+            completed: false,
+          },
+        ],
+      };
+    case "TOGGLE_ITEM":
+      return {
+        ...state,
+        todo: state.todo.map((item) => {
+          if (action.payload === item.id) {
+            return {
+              ...item,
+              completed: !item.completed,
+            };
+          }
+          return {
+            ...item,
+          };
+        }),
+      };
+    case "CLEAR_ALL":
+      return {
+        ...state,
+        todo: state.todo.filter((item) => !item.completed),
+      };
+    default:
+      return state; //( completed: true)
+  }
+};
