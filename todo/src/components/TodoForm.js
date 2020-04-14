@@ -1,19 +1,14 @@
 import React from "react";
 
-const TodoForm = (props) => {
+export default function TodoForm(props) {
   return (
-    <form>
-      <input
-        type="text"
-        name="item"
-        value={props.item}
-        onChange={props.handleChanges}
-      />
-      <button onClick={props.addItem}>Add Todo</button>
+    <div>
+      <form>
+        <input type="text" name="name" value={props.item} />
+      </form>
 
-      <button onClick={props.handleClear}>Clear Completed</button>
-    </form>
+      <button>Submit</button>
+      <button>Clear Completed</button>
+    </div>
   );
-};
-
-export default TodoForm;
+}

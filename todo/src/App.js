@@ -1,85 +1,30 @@
-import React, { useState, useReducer } from "react";
-import TodoList from "./components/TodoList";
+import React from "react";
 import TodoForm from "./components/TodoForm";
-import { chores } from "./reducers/ReducerFile";
+import TodoList from "./components/TodoList";
 
-function App() {
-  const [choreList, setChoreList] = useState(chores);
-
-  const handleChanges = (e) => {
-    setChoreList({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // const toggleTodo = (id) => {
-  //   const newChoreList = chores.map((item) => {
-  //     if (item.id === id) {
-  //       return {
-  //         ...item,
-  //         completed: !item.completed,
-  //       };
-  //     } else {
-  //       return item;
-  //     }
-  //   });
-  //   setChoreList((choreList = newChoreList));
-  // };
-
-  const addItem = (e, item) => {
-    e.preventDefault();
-    const newItem = {
-      name: item,
-      id: Date.now(),
+export default function App() {
+  const data = [
+    {
+      name: "Fold the laundry",
+      id: 123,
       completed: false,
-    };
-
-    setChoreList({
-      chores: [...chores, newItem],
-      item: "",
-    });
-  };
-
-  const handleChore = (e) => {
-    const todos = chores.map((item) => {
-      if (item.id === e) {
-        item.completed = !item.completed;
-        return item;
-      } else {
-        return item;
-      }
-    });
-    setChoreList({ todos });
-  };
-
-  const handleClear = (e) => {
-    e.preventDefault();
-    const deleteAll = chores.filter((item) => !item.completed);
-    setChoreList({
-      chores: deleteAll,
-      item: "",
-    });
-
-    console.log("DELETE ALL", deleteAll);
-  };
+    },
+    {
+      name: "Walk the dogs",
+      id: 1234,
+      completed: false,
+    },
+    {
+      name: "Cook the dinner",
+      id: 12345,
+      completed: false,
+    },
+  ];
 
   return (
     <div>
-      <h3>TODO - REDUCER!</h3>
-      <TodoForm
-        addItem={addItem}
-        chores={chores}
-        handleClear={handleClear}
-        handleChanges={handleChanges}
-        setChoreList={setChoreList}
-      />
-      <TodoList
-        chores={chores}
-        // toggleTodo={toggleTodo}
-        handleChore={handleChore}
-      />
+      <TodoForm />
+      <TodoList data={data} />
     </div>
   );
 }
-
-export default App;
