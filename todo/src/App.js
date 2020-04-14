@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
@@ -21,9 +21,22 @@ export default function App() {
     },
   ];
 
+  const [formData, setFormData] = useState({
+    name: "",
+    completed: false,
+    id: 123,
+  });
+
+  const onInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <div>
-      <TodoForm />
+      <TodoForm onInputChange={onInputChange} />
       <TodoList data={data} />
     </div>
   );

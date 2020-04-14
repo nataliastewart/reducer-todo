@@ -4,7 +4,7 @@ export default function TodoList(props) {
   return (
     <div>
       {props.data.map((item) => (
-        <p>{item.name}</p>
+        <p key={item.id}>{item.name}</p>
       ))}
     </div>
   );
