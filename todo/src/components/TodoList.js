@@ -12,6 +12,10 @@ export default function TodoList(props) {
               props.toogleItem(item.id);
             }}
             className={`todo${item.completed ? "completed" : ""}`}
+            style={item.completed ? { textDecoration: "line-through" } : null}
+            // style={
+            //   props.item.completed ? { textDecoration: "line-through" } : null
+            // }
           >
             <p>{item.name}</p>
           </div>
