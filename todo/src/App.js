@@ -22,12 +22,18 @@ function App() {
     dispatch({ type: "TOGGLE_ITEM", payload: item });
   };
 
+  const clearCompleted = (event) => {
+    event.preventDefault();
+    dispatch({ type: "CLEAR_COMPLETED" });
+  };
+
   return (
     <div className="App">
       <TodoForm
         todoInput={todoInput}
         inputChange={inputChange}
         addTodo={addTodo}
+        clearCompleted={clearCompleted}
       />
       <TodoList state={state} toggleItem={toggleItem} />
     </div>

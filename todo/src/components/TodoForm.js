@@ -11,6 +11,9 @@ export default function TodoForm(props) {
           onChange={props.inputChange}
         />
         <button onClick={(event) => props.addTodo(event)}>Add Todo</button>
+        <button onClick={(event) => props.clearCompleted(event)}>
+          Clear Completed
+        </button>
       </form>
     </div>
   );
