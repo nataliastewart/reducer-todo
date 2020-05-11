@@ -32,6 +32,21 @@ export const reducer = (state, action) => {
           },
         ],
       };
+    case "TOGGLE_ITEM":
+      return {
+        ...state,
+        todos: state.todos.map((item) => {
+          if (action.payload === item.id) {
+            return {
+              ...item,
+              completed: !item.completed,
+            };
+          }
+          return {
+            ...item,
+          };
+        }),
+      };
     default:
       return state;
   }

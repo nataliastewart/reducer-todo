@@ -18,6 +18,10 @@ function App() {
     dispatch({ type: "ADD_TODO", payload: todoInput });
   };
 
+  const toggleItem = (item) => {
+    dispatch({ type: "TOGGLE_ITEM", payload: item });
+  };
+
   return (
     <div className="App">
       <TodoForm
@@ -25,7 +29,7 @@ function App() {
         inputChange={inputChange}
         addTodo={addTodo}
       />
-      <TodoList state={state} />
+      <TodoList state={state} toggleItem={toggleItem} />
     </div>
   );
 }

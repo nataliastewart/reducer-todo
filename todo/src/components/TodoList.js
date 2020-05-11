@@ -5,7 +5,14 @@ export default function TodoList(props) {
     <div>
       {props.state.todos.map((item) => {
         return (
-          <div key={item.id}>
+          <div
+            key={item.id}
+            onClick={() => {
+              props.toggleItem(item.id);
+            }}
+            className={`todo${item.completed ? "completed" : ""}`}
+            style={item.completed ? { textDecoration: "line-through" } : null}
+          >
             <p>{item.name}</p>
           </div>
         );
