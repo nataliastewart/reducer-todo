@@ -5,7 +5,7 @@ export default function TodoList(props) {
     <div>
       {props.state.todos.map((item) => {
         return (
-          <div>
+          <div key={item.id}>
             <p>{item.name}</p>
           </div>
         );

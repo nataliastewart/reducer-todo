@@ -10,9 +10,29 @@ export const initialState = {
       completed: false,
       id: 3892987590,
     },
+    {
+      name: "Review Training Kit",
+      completed: false,
+      id: 3892987100,
+    },
   ],
 };
 
 export const reducer = (state, action) => {
-  return state;
+  switch (action.type) {
+    case "ADD_TODO":
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            name: action.payload,
+            completed: false,
+            id: Date.now(),
+          },
+        ],
+      };
+    default:
+      return state;
+  }
 };
